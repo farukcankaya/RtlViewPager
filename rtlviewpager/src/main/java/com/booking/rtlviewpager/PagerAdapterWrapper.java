@@ -15,6 +15,7 @@
  */
 package com.booking.rtlviewpager;
 
+import android.database.DataSetObservable;
 import android.database.DataSetObserver;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
@@ -27,11 +28,25 @@ import android.view.ViewGroup;
  */
 class PagerAdapterWrapper extends PagerAdapter {
 
+    private final DataSetObservable dataSetObservable = new DataSetObservable();
+
     @NonNull
     private final PagerAdapter adapter;
 
     protected PagerAdapterWrapper(@NonNull PagerAdapter adapter) {
         this.adapter = adapter;
+        this.adapter.registerDataSetObserver(new DataSetObserver() {
+            @Override
+            public void onChanged() {
+                PagerAdapterWrapper.super.notifyDataSetChanged();
+                dataSetObservable.notifyChanged();
+            }
+
+            @Override
+            public void onInvalidated() {
+                dataSetObservable.notifyInvalidated();
+            }
+        });
     }
 
     @NonNull
@@ -86,12 +101,12 @@ class PagerAdapterWrapper extends PagerAdapter {
 
     @Override
     public void registerDataSetObserver(DataSetObserver observer) {
-        adapter.registerDataSetObserver(observer);
+        dataSetObservable.registerObserver(observer);
     }
 
     @Override
     public void unregisterDataSetObserver(DataSetObserver observer) {
-        adapter.unregisterDataSetObserver(observer);
+        dataSetObservable.unregisterObserver(observer);
     }
 
     @Override

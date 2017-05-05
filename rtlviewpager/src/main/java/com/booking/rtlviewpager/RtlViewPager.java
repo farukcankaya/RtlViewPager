@@ -239,6 +239,7 @@ public class RtlViewPager extends ViewPager {
         @Override
         public void onChanged() {
             super.onChanged();
+            // TODO: need to change this part
             adapter.revalidateIndices();
         }
     }
@@ -323,19 +324,19 @@ public class RtlViewPager extends ViewPager {
 
         public static final ClassLoaderCreator<SavedState> CREATOR = new
                 ClassLoaderCreator<SavedState>() {
-            @Override
-            public SavedState createFromParcel(Parcel source, ClassLoader loader) {
-                return new SavedState(source, loader);
-            }
+                    @Override
+                    public SavedState createFromParcel(Parcel source, ClassLoader loader) {
+                        return new SavedState(source, loader);
+                    }
 
-            @Override
-            public SavedState createFromParcel(Parcel source) {
-                return new SavedState(source, null);
-            }
+                    @Override
+                    public SavedState createFromParcel(Parcel source) {
+                        return new SavedState(source, null);
+                    }
 
-            public SavedState[] newArray(int size) {
-                return new SavedState[size];
-            }
-        };
+                    public SavedState[] newArray(int size) {
+                        return new SavedState[size];
+                    }
+                };
     }
 }
