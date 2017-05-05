@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.booking.rtlviewpager.sample;
+package com.farukcankaya.rtlviewpager.sample;
 
 import android.graphics.Color;
 import android.os.Bundle;
