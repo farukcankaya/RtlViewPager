@@ -264,6 +264,11 @@ public class RtlViewPager extends ViewPager {
                 } else {
                     pagerPosition = reverse(position + 1);
                 }
+
+                positionOffsetPixels = getResources().getDisplayMetrics().widthPixels - positionOffsetPixels;
+                if (positionOffset == 0f) {
+                    positionOffsetPixels = 0;
+                }
                 original.onPageScrolled(pagerPosition, positionOffset > 0 ? 1f - positionOffset : positionOffset, positionOffsetPixels);
             }
         }
